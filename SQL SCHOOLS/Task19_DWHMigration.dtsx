@@ -1,0 +1,429 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/17/2020 8:40:34 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-O0LL7P9"
+  DTS:CreatorName="DESKTOP-O0LL7P9\jnemu"
+  DTS:DTSID="{FBCF2156-74A6-4136-9DE9-DB952DDF73BB}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.132"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{D1A071AC-0A87-461C-90BC-9914506D1C4B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-O0LL7P9]"
+      DTS:CreationName="SMOServer"
+      DTS:DTSID="{9ECE0F2F-E7B7-46EA-A050-1461D131D7D2}"
+      DTS:ObjectName="DESKTOP-O0LL7P9">
+      <DTS:ObjectData>
+        <SMOServerConnectionManager
+          ConnectionString="SqlServerName=DESKTOP-O0LL7P9;UseWindowsAuthentication=True;UserName=;"
+          ConnectByProxy="False" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-O0LL7P9\DEVELOPMENT]"
+      DTS:CreationName="SMOServer"
+      DTS:DTSID="{E4566F0F-9C97-4A79-A5D5-4B54411C9FC1}"
+      DTS:ObjectName="DESKTOP-O0LL7P9\DEVELOPMENT">
+      <DTS:ObjectData>
+        <SMOServerConnectionManager
+          ConnectionString="SqlServerName=DESKTOP-O0LL7P9\DEVELOPMENT;UseWindowsAuthentication=True;UserName=;"
+          ConnectByProxy="False" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\POST_MIGRATION"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{E348F341-EC28-43F7-B597-18FB11224A18}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="POST_MIGRATION">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\POST_MIGRATION\Transfer Error Messages Task"
+          DTS:CreationName="Microsoft.TransferErrorMessagesTask"
+          DTS:Description="Transfer Error Messages Task"
+          DTS:DTSID="{FA0A9E2B-8DA9-4F85-94C0-C56F9E29E847}"
+          DTS:ExecutableType="Microsoft.TransferErrorMessagesTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Transfer Error Messages Task"
+          DTS:TaskContact="Transfer Error Messages Task; Microsoft Corporation; SQL Server 2019; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <TransferErrorMessagesTaskData
+              TransferAllErrorMessages="True"
+              IfObjectExists="Overwrite"
+              SourceConnection="{E4566F0F-9C97-4A79-A5D5-4B54411C9FC1}"
+              DestinationConnection="{9ECE0F2F-E7B7-46EA-A050-1461D131D7D2}" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\POST_MIGRATION\Transfer Jobs Task"
+          DTS:CreationName="Microsoft.TransferJobsTask"
+          DTS:Description="Transfer Jobs Task"
+          DTS:DTSID="{5DEFD3F1-F889-4703-9130-93AFF9FB1251}"
+          DTS:ExecutableType="Microsoft.TransferJobsTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Transfer Jobs Task"
+          DTS:TaskContact="Transfer Jobs Task; Microsoft Corporation; SQL Server 2019; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <TransferJobsTaskData
+              TransferAllJobs="True"
+              EnableJobsAtDestination="True"
+              SourceConnection="{E4566F0F-9C97-4A79-A5D5-4B54411C9FC1}"
+              DestinationConnection="{9ECE0F2F-E7B7-46EA-A050-1461D131D7D2}" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\POST_MIGRATION\Transfer Logins Task"
+          DTS:CreationName="Microsoft.TransferLoginsTask"
+          DTS:Description="Transfer Logins Task"
+          DTS:DTSID="{790E8C75-47BF-4EA0-804D-08BDD8496B80}"
+          DTS:ExecutableType="Microsoft.TransferLoginsTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Transfer Logins Task"
+          DTS:TaskContact="Transfer Error Messages Task; Microsoft Corporation; SQL Server 2019; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <TransferLoginsTaskData
+              LoginsToTransfer="AllLoginsFromSelectedDatabases"
+              SourceConnection="{E4566F0F-9C97-4A79-A5D5-4B54411C9FC1}"
+              DestinationConnection="{9ECE0F2F-E7B7-46EA-A050-1461D131D7D2}"
+              DatabasesList="1,14,DW_DESTINATION," />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\POST_MIGRATION\Transfer Master Stored Procedures Task"
+          DTS:CreationName="Microsoft.TransferStoredProceduresTask"
+          DTS:Description="Transfer Master Stored Procedures Task"
+          DTS:DTSID="{C0CF3914-974F-46B2-A2EB-8BD4393717F7}"
+          DTS:ExecutableType="Microsoft.TransferStoredProceduresTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Transfer Master Stored Procedures Task"
+          DTS:TaskContact="Transfer Stored Procedures Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="3">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <TransferStoredProceduresTaskData
+              TransferAllStoredProcedures="True"
+              IfObjectExists="Overwrite"
+              SourceConnection="{E4566F0F-9C97-4A79-A5D5-4B54411C9FC1}"
+              m_DestinationConnectionID="{9ECE0F2F-E7B7-46EA-A050-1461D131D7D2}" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\PRE_MIGRATION CONTAINER"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{58BBEF49-0D10-481B-BDD1-561231719E8F}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PRE_MIGRATION CONTAINER">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\PRE_MIGRATION CONTAINER\Back Up Database Task"
+          DTS:CreationName="Microsoft.DbMaintenanceBackupTask"
+          DTS:Description="Back Up Database Task"
+          DTS:DTSID="{6F7A252D-B90A-467F-AB9C-164F65216870}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceBackupTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Back Up Database Task"
+          DTS:TaskContact="Back Up Database Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7721700C-3B3B-4473-8F17-B5BB0B53A8FF}"
+              SQLTask:DatabaseSelectionType="4"
+              SQLTask:ServerVersion="15"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False"
+              SQLTask:BackupAction="0"
+              SQLTask:BackupIsIncremental="False"
+              SQLTask:BackupFileGroupsFiles=""
+              SQLTask:BackupDeviceType="2"
+              SQLTask:BackupPhysicalDestinationType="2"
+              SQLTask:BackupDestinationType="0"
+              SQLTask:BackupDestinationAutoFolderPath="C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER2019\MSSQL\Backup"
+              SQLTask:BackupActionForExistingBackups="0"
+              SQLTask:BackupCreateSubFolder="False"
+              SQLTask:BackupFileExtension=""
+              SQLTask:BackupVerifyIntegrity="False"
+              SQLTask:ExpireDate="2020-12-01T00:00:00"
+              SQLTask:RetainDays="14"
+              SQLTask:InDays="True"
+              SQLTask:UseExpiration="False"
+              SQLTask:BackupCompressionAction="0"
+              SQLTask:CopyOnlyBackup="False"
+              SQLTask:IgnoreReplicaType="False"
+              SQLTask:CredentialName=""
+              SQLTask:ContainerName=""
+              SQLTask:UrlPrefix=""
+              SQLTask:IsBackupEncrypted="False"
+              SQLTask:BackupEncryptionAlgorithm="0"
+              SQLTask:BackupEncryptorType="0"
+              SQLTask:BackupEncryptorName=""
+              SQLTask:Checksum="False"
+              SQLTask:ContinueOnError="False"
+              SQLTask:IsBlockSizeUsed="False"
+              SQLTask:IsMaxTransferSizeUsed="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:SelectedDatabases
+                SQLTask:DatabaseName="DW_DESTINATION" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\PRE_MIGRATION CONTAINER\Check Database Integrity Task"
+          DTS:CreationName="Microsoft.DbMaintenanceCheckIntegrityTask"
+          DTS:Description="Check Database Integrity Task"
+          DTS:DTSID="{9563DED7-EC06-4DDE-92BF-15A9C26DBF6E}"
+          DTS:ExecutableType="Microsoft.DbMaintenanceCheckIntegrityTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Check Database Integrity Task"
+          DTS:TaskContact="Check Database Integrity Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{7721700C-3B3B-4473-8F17-B5BB0B53A8FF}"
+              SQLTask:DatabaseSelectionType="4"
+              SQLTask:ServerVersion="15"
+              SQLTask:ExtendedLogging="True"
+              SQLTask:LocalConnectionForLogging=""
+              SQLTask:TaskName=""
+              SQLTask:IgnoreDatabasesInNotOnlineState="False"
+              SQLTask:IncludeIndexes="True"
+              SQLTask:PhysicalOnly="False"
+              SQLTask:Tablock="False"
+              SQLTask:MaximumDegreeOfParallelismUsed="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:SelectedDatabases
+                SQLTask:DatabaseName="DW_DESTINATION" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\PRE_MIGRATION CONTAINER.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{5BCC1EC7-720A-4583-A01D-238F37BD50BA}"
+          DTS:From="Package\PRE_MIGRATION CONTAINER\Check Database Integrity Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\PRE_MIGRATION CONTAINER\Back Up Database Task" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Transfer Database Task"
+      DTS:CreationName="Microsoft.TransferDatabaseTask"
+      DTS:Description="Transfer Database Task"
+      DTS:DTSID="{9A2764D1-7109-49DD-A47C-67E3B3297B56}"
+      DTS:ExecutableType="Microsoft.TransferDatabaseTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Transfer Database Task"
+      DTS:TaskContact="Transfer Database Task; Microsoft Corporation; SQL Server 2019; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <TransferDatabasesTaskData
+          SrcConn="{E4566F0F-9C97-4A79-A5D5-4B54411C9FC1}"
+          DestConn="{9ECE0F2F-E7B7-46EA-A050-1461D131D7D2}"
+          Method="1"
+          SrcDBName="DW_DESTINATION"
+          ReattachSrcDB="True"
+          SrcDBFiles="&quot;DW_DESTINATION.mdf&quot;,&quot;C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER2019\MSSQL\DATA&quot;,&quot;&quot;;&quot;DW_DESTINATION_log.ldf&quot;,&quot;C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER2019\MSSQL\DATA&quot;,&quot;&quot;"
+          DestDBName="DW_DESTINATION"
+          DestDBFiles="&quot;DW_DESTINATION.mdf&quot;,&quot;C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER2019\MSSQL\DATA&quot;,&quot;&quot;;&quot;DW_DESTINATION_log.ldf&quot;,&quot;C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER2019\MSSQL\DATA&quot;,&quot;&quot;" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{552948FC-5400-465B-8A0D-A6B2C0C8A85A}"
+      DTS:From="Package\PRE_MIGRATION CONTAINER"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Transfer Database Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{BAF6FDDB-9F49-4C4E-A960-E82191C600D7}"
+      DTS:From="Package\Transfer Database Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\POST_MIGRATION" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="218.4,41.6"
+          Id="Package\POST_MIGRATION\Transfer Error Messages Task"
+          TopLeft="51.4333187964233,81.6000031407675" />
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\POST_MIGRATION\Transfer Jobs Task"
+          TopLeft="73.9333179023537,147.466670330895" />
+        <NodeLayout
+          Size="176,41.6"
+          Id="Package\POST_MIGRATION\Transfer Logins Task"
+          TopLeft="91.4333172069662,14.8666692770852" />
+        <NodeLayout
+          Size="266.4,41.6"
+          Id="Package\POST_MIGRATION\Transfer Master Stored Procedures Task"
+          TopLeft="38.9333192931288,227.533337335057" />
+        <ContainerLayout
+          HeaderHeight="43.2"
+          IsExpanded="False"
+          PanelSize="368.8,340"
+          Size="368.8,43.2"
+          Id="Package\POST_MIGRATION"
+          TopLeft="294.999988277753,205.400001632372" />
+        <NodeLayout
+          Size="190.4,41.6"
+          Id="Package\PRE_MIGRATION CONTAINER\Back Up Database Task"
+          TopLeft="38.3999880790717,144.466668698523" />
+        <NodeLayout
+          Size="220,41.6"
+          Id="Package\PRE_MIGRATION CONTAINER\Check Database Integrity Task"
+          TopLeft="26.7333218759965,20.5333343802558" />
+        <EdgeLayout
+          Id="Package\PRE_MIGRATION CONTAINER.PrecedenceConstraints[Constraint]"
+          TopLeft="135.166654977534,62.1333343802558">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,82.333334318267"
+              Start="0,0"
+              End="0,74.833334318267">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,74.833334318267" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43.2"
+          IsExpanded="False"
+          PanelSize="309.6,244"
+          Size="309.6,43.2"
+          Id="Package\PRE_MIGRATION CONTAINER"
+          TopLeft="133.333328035143,21.6666668388578" />
+        <NodeLayout
+          Size="189.6,41.6"
+          Id="Package\Transfer Database Task"
+          TopLeft="236.666657262378,117.000000929832" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="288.133328035143,64.8666668388578">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="43.3333292272355,52.1333340909744"
+              Start="0,0"
+              End="43.3333292272355,44.6333340909744">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.0666670454872" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.0666670454872"
+                    Point2="0,26.0666670454872"
+                    Point3="4,26.0666670454872" />
+                  <mssgle:LineSegment
+                    End="39.3333292272355,26.0666670454872" />
+                  <mssgle:CubicBezierSegment
+                    Point1="39.3333292272355,26.0666670454872"
+                    Point2="43.3333292272355,26.0666670454872"
+                    Point3="43.3333292272355,30.0666670454872" />
+                  <mssgle:LineSegment
+                    End="43.3333292272355,44.6333340909744" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="331.466657262378,158.600000929832">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="147.933331015375,46.8000007025402"
+              Start="0,0"
+              End="147.933331015375,39.3000007025402">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.4000003512701" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.4000003512701"
+                    Point2="0,23.4000003512701"
+                    Point3="4,23.4000003512701" />
+                  <mssgle:LineSegment
+                    End="143.933331015375,23.4000003512701" />
+                  <mssgle:CubicBezierSegment
+                    Point1="143.933331015375,23.4000003512701"
+                    Point2="147.933331015375,23.4000003512701"
+                    Point3="147.933331015375,27.4000003512701" />
+                  <mssgle:LineSegment
+                    End="147.933331015375,39.3000007025402" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

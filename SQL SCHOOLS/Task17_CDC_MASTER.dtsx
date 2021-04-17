@@ -1,0 +1,235 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/16/2020 4:31:33 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-O0LL7P9"
+  DTS:CreatorName="DESKTOP-O0LL7P9\jnemu"
+  DTS:DTSID="{F03386A7-A533-40A5-92C0-925D0E809E08}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.132"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{CB556A5E-DC8C-451C-8EF5-015340957B22}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-O0LL7P9\DEVELOPMENT.DW_CDC_DESTINATION]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{37EBB72E-AA63-456C-B848-78A50A98BA6C}"
+      DTS:ObjectName="DESKTOP-O0LL7P9\DEVELOPMENT.DW_CDC_DESTINATION">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DESKTOP-O0LL7P9\DEVELOPMENT;Initial Catalog=DW_CDC_DESTINATION;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B3435472-BCF1-4C90-A020-5306D2BE6720}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RCOUNT_VAR">
+      <DTS:VariableValue
+        DTS:DataType="2">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EC0D612C-3E7E-48A5-80FE-39BC5659DA66}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{37EBB72E-AA63-456C-B848-78A50A98BA6C}"
+          SQLTask:SqlStatementSource="SELECT COUNT(*) AS RCOUNT FROM dimPRODUCT_TABLE&#xA;"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="RCOUNT"
+            SQLTask:DtsVariableName="User::RCOUNT_VAR" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\RUN CDC INCR"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{48264F42-964F-4496-9E27-9FEECDB47AA9}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="RUN CDC INCR"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <ExecuteOutOfProcess>True</ExecuteOutOfProcess>
+          <PackageName>Task17_CDC_INCR.dtsx</PackageName>
+          <PackagePassword
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAEB4ORIFWzEScooUhNePRRwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAm6ixxEYm5uOJAZxqRqQX61rNSLkdz7Q3evNrVB2wclAAAAAAOgAAAAAIAACAAAADNsG+0Jn43Q4KDGSPrFhElmUjZMdY2PCt9Lre3cHx6AyAAAAAsJ9WIykTGrqRh3vJHbdgHib99h3dF947nuKxB2Qf1KEAAAAA0w6itfsZ9ITUj8NTEU3xByYwgMbnvE8RN7uB5klKagsgj5b5BuaiPpUZutDUOyoPjgV430jFWOUJpPU0dvdzC</PackagePassword>
+          <ParameterAssignment>
+            <ParameterName>SOURCE_CONNECT_INCR</ParameterName>
+            <BindedVariableOrParameterName>$Project::GLOBAL_PARAM</BindedVariableOrParameterName>
+          </ParameterAssignment>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\RUN CDC INIT"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{B87CAF5A-DF48-4AFA-B8A8-740E168B71F3}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="RUN CDC INIT"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <ExecuteOutOfProcess>True</ExecuteOutOfProcess>
+          <PackageName>Task17_CDC_INIT.dtsx</PackageName>
+          <PackagePassword
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAEB4ORIFWzEScooUhNePRRwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACoBesxrHrbAqo+RB0XIERPaWOHQaIWsoSUxXB6IthOXQAAAAAOgAAAAAIAACAAAADeg+PhcuZAY6hmkSZJ4bNZ7jnQBrGc31p5dunA5guioyAAAACUOFV4SvsldxgPHAabpJgeA0mT40E3tmfpalrapb6HqUAAAAAzko4b3B/J+NrC3yt9FlmyTvDdWoTFK6dGl+rW6JcEgTuMADZvCEwmAVqsV+/pwjpDIijFncrX/tztf7xlfPqL</PackagePassword>
+          <ParameterAssignment>
+            <ParameterName>SOURCE_CONNECT_INIT</ParameterName>
+            <BindedVariableOrParameterName>$Project::GLOBAL_PARAM</BindedVariableOrParameterName>
+          </ParameterAssignment>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{B01969A4-A3BC-4796-8F05-55A502BC1EE5}"
+      DTS:EvalOp="1"
+      DTS:Expression="@[User::RCOUNT_VAR]==0"
+      DTS:From="Package\Execute SQL Task"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\RUN CDC INIT" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{8FBAAE94-C1C8-44C9-ABD0-F346D6F5C712}"
+      DTS:EvalOp="1"
+      DTS:Expression="@[User::RCOUNT_VAR]&gt;0"
+      DTS:From="Package\Execute SQL Task"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\RUN CDC INCR" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="184.8,41.6"
+          Id="Package\RUN CDC INIT"
+          TopLeft="489.166647228931,66.7333338636822" />
+        <NodeLayout
+          Size="192.8,41.6"
+          Id="Package\RUN CDC INCR"
+          TopLeft="479.166647626295,179.400001425743" />
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Execute SQL Task"
+          TopLeft="175.833326346345,117.866667603387" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="340.633326346345,133.066667603387">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="148.533320882586,-45.5333337397045"
+              Start="0,0"
+              End="141.033320882586,-45.5333337397045">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="58.7140688170919,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="58.7140688170919,0"
+                    Point2="62.7140688170919,0"
+                    Point3="62.7140688170919,-4" />
+                  <mssgle:LineSegment
+                    End="62.7140688170919,-41.5333337397045" />
+                  <mssgle:CubicBezierSegment
+                    Point1="62.7140688170919,-41.5333337397045"
+                    Point2="62.7140688170919,-45.5333337397045"
+                    Point3="66.7140688170919,-45.5333337397045" />
+                  <mssgle:LineSegment
+                    End="141.033320882586,-45.5333337397045" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="54.7140688170919,1,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="340.633326346345,144.266667603387">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="138.53332127995,55.9333338223564"
+              Start="0,0"
+              End="131.03332127995,55.9333338223564">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="54.4918467626457,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="54.4918467626457,0"
+                    Point2="58.4918467626457,0"
+                    Point3="58.4918467626457,4" />
+                  <mssgle:LineSegment
+                    End="58.4918467626457,51.9333338223564" />
+                  <mssgle:CubicBezierSegment
+                    Point1="58.4918467626457,51.9333338223564"
+                    Point2="58.4918467626457,55.9333338223564"
+                    Point3="62.4918467626457,55.9333338223564" />
+                  <mssgle:LineSegment
+                    End="131.03332127995,55.9333338223564" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="50.4918467626457,-22,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

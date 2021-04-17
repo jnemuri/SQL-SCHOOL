@@ -1,0 +1,895 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/9/2020 11:10:06 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-O0LL7P9"
+  DTS:CreatorName="DESKTOP-O0LL7P9\jnemu"
+  DTS:DTSID="{424A8F4F-6258-4033-924F-3000038D84DF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.132"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{C427C32A-DCBC-408B-91C0-07367F1AADCA}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BULK]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{4683B810-BF23-422F-A97A-4505F94787BB}"
+      DTS:ObjectName="BULK">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\Users\jnemu\Google Drive (tampa.baba30@gmail.com)\Microsoft SQL Server\SQL SCHOOLS\BULK" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-O0LL7P9.PRODUCT_SALES_DW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{CF6BFFF9-C202-4543-AA97-DFEC529AE013}"
+      DTS:ObjectName="DESKTOP-O0LL7P9.PRODUCT_SALES_DW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DESKTOP-O0LL7P9;Initial Catalog=PRODUCT_SALES_DW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{CA490314-4190-496E-900D-6BECC63E8A67}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\jnemu\Google Drive (tampa.baba30@gmail.com)\Microsoft SQL Server\SQL SCHOOLS\Pivot\5 4 PIVOT EXAMPLE SOURCE.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Bulk Insert Task"
+      DTS:CreationName="Microsoft.BulkInsertTask"
+      DTS:Description="Bulk Insert Task"
+      DTS:DTSID="{F87EA824-7FA7-4AED-ABF6-FE548ACD2159}"
+      DTS:ExecutableType="Microsoft.BulkInsertTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Bulk Insert Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <BulkInsertTask:BulkInsertTaskData
+          BulkInsertTask:SourceConnectionName="{4683B810-BF23-422F-A97A-4505F94787BB}"
+          BulkInsertTask:DestinationConnectionName="{CF6BFFF9-C202-4543-AA97-DFEC529AE013}"
+          BulkInsertTask:DestinationTableName="[dbo].[Fact_Sales]"
+          BulkInsertTask:FirstRow="2" xmlns:BulkInsertTask="www.microsoft.com/sqlserver/dts/tasks/bulkinserttask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{7A3F31C2-405D-46BF-9991-2785CE423712}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Excel Destination"
+              componentClassID="Microsoft.ExcelDestination"
+              contactInfo="Excel Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Excel Destination"
+              name="Excel Destination"
+              usesDispositions="true">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">PIVOT_OUTPUT</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Excel Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{91319EC7-18D8-41A0-BCA1-9D7F5EB9B975}:invalid"
+                  connectionManagerRefId="{91319EC7-18D8-41A0-BCA1-9D7F5EB9B975}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Excel Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[ID]"
+                      cachedDataType="r8"
+                      cachedName="ID"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[ID]"
+                      lineageId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[ID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="NAME"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[NAME]"
+                      lineageId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[NAME]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[YEAR1]"
+                      cachedDataType="r8"
+                      cachedName="YEAR1"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[YEAR1]"
+                      lineageId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[YEAR1]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[YEAR2]"
+                      cachedDataType="r8"
+                      cachedName="YEAR2"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[YEAR2]"
+                      lineageId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[YEAR2]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[YEAR3]"
+                      cachedDataType="r8"
+                      cachedName="YEAR3"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[YEAR3]"
+                      lineageId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[YEAR3]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[YEAR4]"
+                      cachedDataType="r8"
+                      cachedName="YEAR4"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[YEAR4]"
+                      lineageId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[YEAR4]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[ID]"
+                      dataType="r8"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[NAME]"
+                      dataType="nText"
+                      name="NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[YEAR1]"
+                      dataType="r8"
+                      name="YEAR1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[YEAR2]"
+                      dataType="r8"
+                      name="YEAR2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[YEAR3]"
+                      dataType="r8"
+                      name="YEAR3" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[YEAR4]"
+                      dataType="r8"
+                      name="YEAR4" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Excel Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Excel Source"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Excel Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">SALES</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Excel Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[ProductID]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[ProductID]"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[ProductID]"
+                      name="ProductID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Name]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[OrderYear]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[OrderYear]"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[OrderYear]"
+                      name="OrderYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[OrderQuantity]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[OrderQuantity]"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[OrderQuantity]"
+                      name="OrderQuantity"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[ProductID]"
+                      dataType="r8"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[OrderYear]"
+                      dataType="r8"
+                      name="OrderYear" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[OrderQuantity]"
+                      dataType="r8"
+                      name="OrderQuantity" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ProductID]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ProductID]"
+                      name="ProductID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[OrderYear]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[OrderYear]"
+                      name="OrderYear" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[OrderQuantity]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[OrderQuantity]"
+                      name="OrderQuantity" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Pivot"
+              componentClassID="Microsoft.Pivot"
+              contactInfo="Pivot;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Compacts an input data flow by pivoting it on a column value, making it less normalized. The input data should be sorted by the pivot column because a pivot happens each time data in the pivot column changes. Note: duplicate rows will cause this transformation to fail."
+              name="Pivot"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Causes the Pivot Transform to ignore rows containing unrecognized values in the Pivot Key column and to report the complete list of unmatched values at the end of DataFlow execution. Useful for collecting a list of values from input rows that can be used to automatically generate output columns."
+                  name="PassThroughUnmatchedPivotKeys">false</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Pivot.Inputs[Pivot Default Input]"
+                  hasSideEffects="true"
+                  name="Pivot Default Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Pivot.Inputs[Pivot Default Input].Columns[ProductID]"
+                      cachedDataType="r8"
+                      cachedName="ProductID"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[ProductID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Describes how the input column participates in the pivot operation. It can help define a set of related records, it can hold the key that uniquely identifies a row within the related set and upon which the values are pivoted, it can hold a value that gets transferred into a pivoted column or it can contain a value that simply passes straight though the pivot unchanged."
+                          name="PivotUsage">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Pivot.Inputs[Pivot Default Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Name"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Name]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Describes how the input column participates in the pivot operation. It can help define a set of related records, it can hold the key that uniquely identifies a row within the related set and upon which the values are pivoted, it can hold a value that gets transferred into a pivoted column or it can contain a value that simply passes straight though the pivot unchanged."
+                          name="PivotUsage">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Pivot.Inputs[Pivot Default Input].Columns[OrderYear]"
+                      cachedDataType="r8"
+                      cachedName="OrderYear"
+                      errorOrTruncationOperation="Pivot Key Lookup"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[OrderYear]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Describes how the input column participates in the pivot operation. It can help define a set of related records, it can hold the key that uniquely identifies a row within the related set and upon which the values are pivoted, it can hold a value that gets transferred into a pivoted column or it can contain a value that simply passes straight though the pivot unchanged."
+                          name="PivotUsage">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Pivot.Inputs[Pivot Default Input].Columns[OrderQuantity]"
+                      cachedDataType="r8"
+                      cachedName="OrderQuantity"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[OrderQuantity]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Describes how the input column participates in the pivot operation. It can help define a set of related records, it can hold the key that uniquely identifies a row within the related set and upon which the values are pivoted, it can hold a value that gets transferred into a pivoted column or it can contain a value that simply passes straight though the pivot unchanged."
+                          name="PivotUsage">3</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output]"
+                  name="Pivot Default Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[ID]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[ID]"
+                      name="ID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[ProductID]}</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue" />
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[NAME]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[NAME]"
+                      name="NAME">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Name]}</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue" />
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[YEAR1]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[YEAR1]"
+                      name="YEAR1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[OrderQuantity]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">2001</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[YEAR2]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[YEAR2]"
+                      name="YEAR2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[OrderQuantity]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">2002</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[YEAR3]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[YEAR3]"
+                      name="YEAR3">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[OrderQuantity]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">2003</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[YEAR4]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output].Columns[YEAR4]"
+                      name="YEAR4">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The lineage identifier of an input column that contains a PivotedValue or the value -1. The value -1 indicates the column is not used in a pivot operation"
+                          name="SourceColumn">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[OrderQuantity]}</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a value that matches one of the possible values from the input column that is marked as the pivot key by the PivotUsage property."
+                          expressionType="Notify"
+                          name="PivotKeyValue">2004</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Pivot.Outputs[Pivot Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Pivot Error Output"
+                  synchronousInputId="Package\Data Flow Task\Pivot.Inputs[Pivot Default Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Pivot.Outputs[Pivot Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Pivot.Outputs[Pivot Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Pivot.Outputs[Pivot Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Pivot.Outputs[Pivot Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Script Component"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;12"
+              description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
+              name="Script Component"
+              version="12">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Stores the source code of the component"
+                  isArray="true"
+                  name="SourceCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="0" />
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Stores the binary representation of the component"
+                  isArray="true"
+                  name="BinaryCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="0" />
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                  name="VSTAProjectName"
+                  typeConverter="NOTBROWSABLE">SC_039e640a50af46dc8ea7e70986c50583</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the programming language used by the script."
+                  name="ScriptLanguage"
+                  typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages">CSharp</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read-only variables."
+                  name="ReadOnlyVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read/write variables."
+                  name="ReadWriteVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg"></property>
+                <property
+                  dataType="System.String"
+                  description="List of breakpoints present on the script."
+                  isArray="true"
+                  name="BreakpointCollection"
+                  typeConverter="NOTBROWSABLE">
+                  <arrayElements
+                    arrayElementCount="0" />
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataChecksum140"
+                  typeConverter="NOTBROWSABLE"></property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ScriptComponentHost</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Script Component.Inputs[Input 0]"
+                  hasSideEffects="true"
+                  name="Input 0">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Script Component.Outputs[Output 0]"
+                  name="Output 0"
+                  synchronousInputId="Package\Data Flow Task\Script Component.Inputs[Input 0]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Excel Source Output]"
+              endId="Package\Data Flow Task\Pivot.Inputs[Pivot Default Input]"
+              name="Excel Source Output"
+              startId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Pivot Default Output]"
+              endId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input]"
+              name="Pivot Default Output"
+              startId="Package\Data Flow Task\Pivot.Outputs[Pivot Default Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{819B2C86-932D-4D37-933C-BE11884E8848}"
+      DTS:From="Package\Data Flow Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Bulk Insert Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\Data Flow Task"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Bulk Insert Task"
+          TopLeft="151.666660639975,182.000001446406" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="80.7,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="147.366660639975,134.900001446406"
+              Start="0,0"
+              End="147.366660639975,127.400001446406">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.450000723203" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,63.450000723203"
+                    Point2="0,67.450000723203"
+                    Point3="4,67.450000723203" />
+                  <mssgle:LineSegment
+                    End="143.366660639975,67.450000723203" />
+                  <mssgle:CubicBezierSegment
+                    Point1="143.366660639975,67.450000723203"
+                    Point2="147.366660639975,67.450000723203"
+                    Point3="147.366660639975,71.450000723203" />
+                  <mssgle:LineSegment
+                    End="147.366660639975,127.400001446406" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="101.6,41.6"
+          Id="Package\Data Flow Task\Pivot"
+          TopLeft="157.499993741513,150.800001198451" />
+        <NodeLayout
+          Size="159.2,41.6"
+          Id="Package\Data Flow Task\Excel Destination"
+          TopLeft="246.666656865014,332.800002644857" />
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\Data Flow Task\Excel Source"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Pivot Default Output]"
+          TopLeft="208.299993741513,192.400001198451">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="117.966663123502,140.400001446406"
+              Start="0,0"
+              End="117.966663123502,132.900001446406">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.2000007232031" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,66.2000007232031"
+                    Point2="0,70.2000007232031"
+                    Point3="4,70.2000007232031" />
+                  <mssgle:LineSegment
+                    End="113.966663123502,70.2000007232031" />
+                  <mssgle:CubicBezierSegment
+                    Point1="113.966663123502,70.2000007232031"
+                    Point2="117.966663123502,70.2000007232031"
+                    Point3="117.966663123502,74.2000007232031" />
+                  <mssgle:LineSegment
+                    End="117.966663123502,132.900001446406" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Excel Source Output]"
+          TopLeft="75.5,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="132.799993741513,103.700001198451"
+              Start="0,0"
+              End="132.799993741513,96.2000011984508">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.8500005992254" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,47.8500005992254"
+                    Point2="0,51.8500005992254"
+                    Point3="4,51.8500005992254" />
+                  <mssgle:LineSegment
+                    End="128.799993741513,51.8500005992254" />
+                  <mssgle:CubicBezierSegment
+                    Point1="128.799993741513,51.8500005992254"
+                    Point2="132.799993741513,51.8500005992254"
+                    Point3="132.799993741513,55.8500005992254" />
+                  <mssgle:LineSegment
+                    End="132.799993741513,96.2000011984508" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="161.6,41.6"
+          Id="Package\Data Flow Task\Script Component"
+          TopLeft="104.999995827675,389.133336425887" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Excel Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

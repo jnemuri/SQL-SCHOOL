@@ -1,0 +1,24 @@
+﻿<?xml version="1.0"?>
+<SSIS:Parameters xmlns:SSIS="www.microsoft.com/SqlServer/SSIS">
+  <SSIS:Parameter
+    SSIS:Name="GLOBAL_PARAM">
+    <SSIS:Properties>
+      <SSIS:Property
+        SSIS:Name="ID">{9c182c25-f38f-47d4-b576-952df5d8d7bb}</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="CreationName"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Description"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Required">1</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Sensitive">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Value">Data Source=DESKTOP-O0LL7P9\DEVELOPMENT;Initial Catalog=SOURCE_CDCDATABASE;Integrated Security=True;Application Name=SSIS-Package1-{7721700C-3B3B-4473-8F17-B5BB0B53A8FF}DESKTOP-O0LL7P9\DEVELOPMENT.SOURCE_CDCDATABASE;</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="DataType">18</SSIS:Property>
+    </SSIS:Properties>
+  </SSIS:Parameter>
+</SSIS:Parameters>

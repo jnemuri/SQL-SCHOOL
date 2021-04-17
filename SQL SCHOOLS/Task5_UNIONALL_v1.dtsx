@@ -1,0 +1,1161 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/2/2020 8:36:21 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-O0LL7P9"
+  DTS:CreatorName="DESKTOP-O0LL7P9\jnemu"
+  DTS:DTSID="{6BCBBD36-575D-4ECF-8423-A9388E405BCC}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.132"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{308E95C8-BE41-4B6B-9884-B8E4F77E53CC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-O0LL7P9\DEVELOPMENT.SQLSCHOOL]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{AD854A20-78D7-454F-85AD-19C1E782C6C0}"
+      DTS:ObjectName="DESKTOP-O0LL7P9\DEVELOPMENT.SQLSCHOOL">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DESKTOP-O0LL7P9\DEVELOPMENT;Initial Catalog=SQLSCHOOL;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{871131C3-E20A-42B0-A534-E9B51285057A}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\jnemu\Google Drive (tampa.baba30@gmail.com)\Microsoft SQL Server\SQL SCHOOLS\ssissessionnotesmergeunionall\3 2 BigData Input File.xls;Extended Properties=&quot;Excel 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{9205544F-2C29-439B-809B-98E555579251}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\FemaleData"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="FemaleData"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Female_Data</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\FemaleData.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[CustomerKey]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].ExternalColumns[CustomerKey]"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[CustomerKey]"
+                      name="CustomerKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].ExternalColumns[FirstName]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].ExternalColumns[LastName]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[MaritalStatus]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].ExternalColumns[MaritalStatus]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[MaritalStatus]"
+                      name="MaritalStatus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[Gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].ExternalColumns[Gender]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[EmailAddress]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].ExternalColumns[EmailAddress]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[EmailAddress]"
+                      name="EmailAddress"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[YearlyIncome]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].ExternalColumns[YearlyIncome]"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[YearlyIncome]"
+                      name="YearlyIncome"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].ExternalColumns[CustomerKey]"
+                      dataType="r8"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="255"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="255"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].ExternalColumns[MaritalStatus]"
+                      dataType="wstr"
+                      length="255"
+                      name="MaritalStatus" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="255"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].ExternalColumns[EmailAddress]"
+                      dataType="wstr"
+                      length="255"
+                      name="EmailAddress" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].ExternalColumns[YearlyIncome]"
+                      dataType="cy"
+                      name="YearlyIncome" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[CustomerKey]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[CustomerKey]"
+                      name="CustomerKey" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[FirstName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[LastName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[MaritalStatus]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[MaritalStatus]"
+                      name="MaritalStatus" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[Gender]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[EmailAddress]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[EmailAddress]"
+                      name="EmailAddress" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[YearlyIncome]"
+                      dataType="cy"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[YearlyIncome]"
+                      name="YearlyIncome" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\MaleData"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="MaleData"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Male_Data</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\MaleData.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[CustomerKey]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].ExternalColumns[CustomerKey]"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[CustomerKey]"
+                      name="CustomerKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].ExternalColumns[FirstName]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].ExternalColumns[LastName]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[MaritalStatus]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].ExternalColumns[MaritalStatus]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[MaritalStatus]"
+                      name="MaritalStatus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[Gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].ExternalColumns[Gender]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[EmailAddress]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].ExternalColumns[EmailAddress]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[EmailAddress]"
+                      name="EmailAddress"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[YearlyIncome]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].ExternalColumns[YearlyIncome]"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[YearlyIncome]"
+                      name="YearlyIncome"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].ExternalColumns[CustomerKey]"
+                      dataType="r8"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="255"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="255"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].ExternalColumns[MaritalStatus]"
+                      dataType="wstr"
+                      length="255"
+                      name="MaritalStatus" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="255"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].ExternalColumns[EmailAddress]"
+                      dataType="wstr"
+                      length="255"
+                      name="EmailAddress" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].ExternalColumns[YearlyIncome]"
+                      dataType="cy"
+                      name="YearlyIncome" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[CustomerKey]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[CustomerKey]"
+                      name="CustomerKey" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[FirstName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[LastName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[MaritalStatus]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[MaritalStatus]"
+                      name="MaritalStatus" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[Gender]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[EmailAddress]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[EmailAddress]"
+                      name="EmailAddress" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[YearlyIncome]"
+                      dataType="cy"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[YearlyIncome]"
+                      name="YearlyIncome" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[OLEEtlUnionAll]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-O0LL7P9\DEVELOPMENT.SQLSCHOOL]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-O0LL7P9\DEVELOPMENT.SQLSCHOOL]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerKey]"
+                      cachedDataType="r8"
+                      cachedName="CustomerKey"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[CustomerKey]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MaritalStatus]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="MaritalStatus"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MaritalStatus]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[MaritalStatus]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EmailAddress]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="EmailAddress"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[EmailAddress]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[YearlyIncome]"
+                      cachedDataType="cy"
+                      cachedName="YearlyIncome"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[YearlyIncome]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[YearlyIncome]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      dataType="r8"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="255"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="255"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MaritalStatus]"
+                      dataType="wstr"
+                      length="255"
+                      name="MaritalStatus" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="255"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
+                      dataType="wstr"
+                      length="255"
+                      name="EmailAddress" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[YearlyIncome]"
+                      dataType="cy"
+                      name="YearlyIncome" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[CustomerKey]"
+                      cachedDataType="r8"
+                      cachedName="CustomerKey"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[CustomerKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[CustomerKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FirstName"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[FirstName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[FirstName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="LastName"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[LastName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LastName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[MaritalStatus]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="MaritalStatus"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[MaritalStatus]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[MaritalStatus]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Gender"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[Gender]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Gender]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[EmailAddress]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="EmailAddress"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[EmailAddress]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[EmailAddress]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[YearlyIncome]"
+                      cachedDataType="cy"
+                      cachedName="YearlyIncome"
+                      lineageId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output].Columns[YearlyIncome]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[YearlyIncome]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[CustomerKey]"
+                      cachedDataType="r8"
+                      cachedName="CustomerKey"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[CustomerKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[CustomerKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FirstName"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[FirstName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[FirstName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="LastName"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[LastName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LastName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[MaritalStatus]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="MaritalStatus"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[MaritalStatus]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[MaritalStatus]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Gender"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[Gender]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Gender]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[EmailAddress]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="EmailAddress"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[EmailAddress]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[EmailAddress]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[YearlyIncome]"
+                      cachedDataType="cy"
+                      cachedName="YearlyIncome"
+                      lineageId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output].Columns[YearlyIncome]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[YearlyIncome]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[CustomerKey]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[CustomerKey]"
+                      name="CustomerKey" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[FirstName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LastName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[MaritalStatus]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[MaritalStatus]"
+                      name="MaritalStatus" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Gender]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[EmailAddress]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[EmailAddress]"
+                      name="EmailAddress" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[YearlyIncome]"
+                      dataType="cy"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[YearlyIncome]"
+                      name="YearlyIncome" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Excel Source Output]"
+              endId="Package\Data Flow Task\Union All.Inputs[Union All Input 1]"
+              name="Excel Source Output"
+              startId="Package\Data Flow Task\MaleData.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Excel Source Output1]"
+              endId="Package\Data Flow Task\Union All.Inputs[Union All Input 2]"
+              name="Excel Source Output"
+              startId="Package\Data Flow Task\FemaleData.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Union All Output 1]"
+              endId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Union All Output 1"
+              startId="Package\Data Flow Task\Union All.Outputs[Union All Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\Data Flow Task"
+          TopLeft="5.5,5.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="120,41.6"
+          Id="Package\Data Flow Task\Union All"
+          TopLeft="208.666666666667,144.666666666667" />
+        <NodeLayout
+          Size="135.2,41.6"
+          Id="Package\Data Flow Task\FemaleData"
+          TopLeft="324.666666666667,33.3333333333333" />
+        <NodeLayout
+          Size="123.2,41.6"
+          Id="Package\Data Flow Task\MaleData"
+          TopLeft="96.5000000000001,16.1666666666667" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Data Flow Task\OLE DB Destination"
+          TopLeft="194.666666666667,243.333333333333" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Union All Output 1]"
+          TopLeft="268.666666666667,186.266666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11.6000000000001,57.0666666666667"
+              Start="0,0"
+              End="11.6000000000001,49.5666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5333333333334" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.5333333333334"
+                    Point2="0,28.5333333333334"
+                    Point3="4,28.5333333333334" />
+                  <mssgle:LineSegment
+                    End="7.60000000000008,28.5333333333334" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7.60000000000008,28.5333333333334"
+                    Point2="11.6000000000001,28.5333333333334"
+                    Point3="11.6000000000001,32.5333333333334" />
+                  <mssgle:LineSegment
+                    End="11.6000000000001,49.5666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Excel Source Output1]"
+          TopLeft="392.266666666667,74.9333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-104.933333333334,69.7333333333333"
+              Start="0,0"
+              End="-104.933333333334,62.2333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.2894736842105" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.2894736842105"
+                    Point2="0,41.2894736842105"
+                    Point3="-4,41.2894736842105" />
+                  <mssgle:LineSegment
+                    End="-100.933333333334,41.2894736842105" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-100.933333333334,41.2894736842105"
+                    Point2="-104.933333333334,41.2894736842105"
+                    Point3="-104.933333333334,45.2894736842105" />
+                  <mssgle:LineSegment
+                    End="-104.933333333334,62.2333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Excel Source Output]"
+          TopLeft="158.1,57.7666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="91.8999999999999,86.8999999999999"
+              Start="0,0"
+              End="91.8999999999999,79.3999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.453947368421" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,47.453947368421"
+                    Point2="0,51.453947368421"
+                    Point3="4,51.453947368421" />
+                  <mssgle:LineSegment
+                    End="87.8999999999999,51.453947368421" />
+                  <mssgle:CubicBezierSegment
+                    Point1="87.8999999999999,51.453947368421"
+                    Point2="91.8999999999999,51.453947368421"
+                    Point3="91.8999999999999,55.453947368421" />
+                  <mssgle:LineSegment
+                    End="91.8999999999999,79.3999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\FemaleData">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\MaleData">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

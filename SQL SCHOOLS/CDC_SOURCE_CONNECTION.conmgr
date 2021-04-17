@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="CDC_SOURCE_CONNECTION"
+  DTS:DTSID="{7721700C-3B3B-4473-8F17-B5BB0B53A8FF}"
+  DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <DTS:PropertyExpression
+    DTS:Name="ConnectionString">@[$Project::GLOBAL_PARAM]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=DESKTOP-O0LL7P9\DEVELOPMENT;Initial Catalog=SOURCE_CDCDATABASE;Integrated Security=True;Application Name=SSIS-Package1-{7721700C-3B3B-4473-8F17-B5BB0B53A8FF}DESKTOP-O0LL7P9\DEVELOPMENT.SOURCE_CDCDATABASE;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
